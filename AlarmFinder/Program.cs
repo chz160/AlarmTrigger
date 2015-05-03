@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace AlarmFinder
 {
@@ -12,24 +11,55 @@ namespace AlarmFinder
     {
         static void Main(string[] args)
         {
-            var lower = 1;
-            var upper = 254;
+            const string subnet = "10.10.1.";
+            const int port = 8000;
+            const int lower = 1;
+            const int upper = 254;
             var threadList = new List<Task>();
-            for (int i = 1; i <= upper; i++)
+            Console.WriteLine("Searching...");
+
+            var cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken cancellationToken = cancellationTokenSource.Token;
+
+            for (var i = lower; i <= upper; i++)
             {
-                threadList.Add(
-                    Task.Factory.StartNew(() =>
+                var lastSection = i;
+                threadList.Add(Task.Factory.StartNew(() =>
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    using (var client = new CustomWebClient())
                     {
-                        using (var client = new WebClient())
+                        client.Timeout = 500;
+                        try
                         {
-                            var url = string.Format("http://10.10.1.{0}", i);
+                            var ip = string.Format("{0}{1}", subnet, lastSection);
+                            var url = string.Format("http://{0}:{1}/status", ip, port);
+                            Console.WriteLine("Checking ip address {0}", ip);
                             var data = client.DownloadString(new Uri(url));
-                            
+                            if (!string.IsNullOrEmpty(data))
+                            {
+                                var status = JsonConvert.DeserializeObject<Status>(data);
+                                if (status != null && status.Message == "Alarm Is Up")
+                                {
+                                    Console.WriteLine("Alarm found at {0}", ip);
+                                    cancellationTokenSource.Cancel();
+                                }
+                            }
                         }
-                    })
-                );
+                        catch (WebException)
+                        { }
+                    }
+                }, cancellationToken));
             }
-            
+            try
+            {
+                Task.WaitAll(threadList.ToArray());
+            }
+            catch (AggregateException)
+            {}
+
+            Console.WriteLine("Press any key to end.");
+            Console.ReadKey();
         }
     }
 }
