@@ -7,8 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmAPI", "AlarmAPI\AlarmA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DE7BAB26-8FEB-470B-9A20-E0F89B1E2214}"
 	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlarmFinder", "AlarmFinder\AlarmFinder.csproj", "{CD5CF1D4-D133-4D2F-A871-D606295C5B1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +25,10 @@ Global
 		{DCCB5CCF-2947-494E-89F9-EA44FFD26A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCCB5CCF-2947-494E-89F9-EA44FFD26A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCCB5CCF-2947-494E-89F9-EA44FFD26A85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD5CF1D4-D133-4D2F-A871-D606295C5B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD5CF1D4-D133-4D2F-A871-D606295C5B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD5CF1D4-D133-4D2F-A871-D606295C5B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD5CF1D4-D133-4D2F-A871-D606295C5B1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
