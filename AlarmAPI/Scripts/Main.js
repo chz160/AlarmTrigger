@@ -13,6 +13,8 @@
 
 
     function ShowTweet(tweet) {
+        $("#show-tweet").fadeOut();
         $("#show-tweet").html(tweet.HTML);
+        $("#show-tweet").fadeIn();
     }
 });
