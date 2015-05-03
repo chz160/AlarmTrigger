@@ -13,8 +13,9 @@
 
 
     function ShowTweet(tweet) {
-        $("#show-tweet").fadeOut();
-        $("#show-tweet").html(tweet.HTML);
-        $("#show-tweet").fadeIn();
+        $("#show-tweet").fadeOut(500, function() {
+            $("#show-tweet").html(tweet.HTML);
+            $("#show-tweet").fadeIn();
+        });
     }
 });
