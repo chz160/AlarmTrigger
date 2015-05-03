@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Tweetinvi;
 
 namespace AlarmAPI
 {
@@ -24,7 +17,7 @@ namespace AlarmAPI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             alarm = new AlarmTwitterStreamClass();
 
-            Task.Factory.StartNew(() => { alarm.Start(); });
+            Task.Factory.StartNew(() => alarm.Start());
         }
 
         
