@@ -14,13 +14,25 @@ namespace AlarmAPI
         public static void SendNewTweet(Tweetinvi.Core.Interfaces.ITweet tweet)
         {
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<TwitterUpdateHub>();
-            var domainTweet = new
+
+            if (tweet != null)
             {
-               tweet.Text,
-               tweet.Source,
-               tweet.Creator.Name
-            };
-            hubContext.Clients.All.sendNewTweet(domainTweet);
+                var html = "";
+                var embedObject = tweet.GenerateOEmbedTweet();
+                if (embedObject != null)
+                {
+                    html = embedObject.HTML;
+                    var domainTweet = new
+                    {
+                        tweet.Text,
+                        tweet.Source,
+                        tweet.Creator.Name,
+                        HTML = html
+                    };
+                    hubContext.Clients.All.sendNewTweet(domainTweet);
+                }
+                    
+            }
         }
     }
 }

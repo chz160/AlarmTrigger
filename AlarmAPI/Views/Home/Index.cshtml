@@ -1,40 +1,39 @@
 ﻿@{
-@{
     ViewBag.Title = "Demo";
 }
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".submit-hashtag").click(function () {
-                var hashtag = $(".hashtag-input").val();
 
-                $.get("/url/" + hashtag, function () {
+<div class="row">
+    <div class="col-md-4">
 
-                });
-            });
-        });
-    </script>
+    </div>
+    <div class="col-md-4">
+        <div class="row" style="margin-top:45px">
+            <div class="col-lg-12">
+                <div class="input-group">
+                    <input type="text" class="form-control hashtag-input" placeholder="Enter Twitter Hashtag Here...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary submit-hashtag" type="button">Submit</button>
+                    </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+    </div>
+    <div class="col-md-4">
 
-    <div class="row">
-        <div class="col-md-4">
-
-        </div>
-        <div class="col-md-4">
-            <div class="row" style="margin-top:45px">
-                <div class="col-lg-12">
-                    <div class="input-group">
-                        <input type="text" class="form-control hashtag-input" placeholder="Enter Twitter Hashtag Here...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary submit-hashtag" type="button">Submit</button>
-                        </span>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-            </div><!-- /.row -->
-        </div>
-        <div class="col-md-4">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+        <div id="show-tweet">
 
         </div>
     </div>
+    <div class="col-md-2">
+    </div>
+</div>
 
 @section scripts
 {

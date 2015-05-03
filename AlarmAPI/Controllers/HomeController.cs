@@ -26,5 +26,11 @@ namespace AlarmAPI.Controllers
 
             return View();
         }
+
+        public ActionResult UpdateHashTag(String hashtag)
+        {
+            MvcApplication.alarm.GlobalUpdateHashTag(hashtag);
+            return new EmptyResult();
+        }
     }
 }
