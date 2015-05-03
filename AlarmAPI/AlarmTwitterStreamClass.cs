@@ -11,36 +11,36 @@ namespace AlarmAPI
 {
     public class AlarmTwitterStreamClass
     {
-        private Tweetinvi.Core.Interfaces.Streaminvi.IFilteredStream _filteredStream;
+        private const string ConsumerKey = "bNvDEkGGmyXlnHhi5b6utXfVF";
+        private const string ConsumerSecret = "kqaBC51XxmeXT5lekUlXSKCqDRxc23cLcFStsvgNTYdlQ4EkCt";
+        private const string UserToken = "16899512-aakZosldVAApq75zwipk5hQ2bdgxbJAAGdHviIV75";
+        private const string UserSecret = "w00NwK7WbNOZlIwrvCgiVzt4QGVY6TCDPolLQKIQZtP6L";
 
-        CancellationTokenSource _cts = new CancellationTokenSource();
+        private readonly Tweetinvi.Core.Interfaces.Streaminvi.IFilteredStream _filteredStream;
 
         public AlarmTwitterStreamClass()
         {
-            _filteredStream = Tweetinvi.Stream.CreateFilteredStream();
-            string consumerKey = "bNvDEkGGmyXlnHhi5b6utXfVF";
-            string consumerSecret = "kqaBC51XxmeXT5lekUlXSKCqDRxc23cLcFStsvgNTYdlQ4EkCt";
-
-            TwitterCredentials.SetCredentials("16899512-aakZosldVAApq75zwipk5hQ2bdgxbJAAGdHviIV75", "w00NwK7WbNOZlIwrvCgiVzt4QGVY6TCDPolLQKIQZtP6L", consumerKey, consumerSecret);
-
+            _filteredStream = Stream.CreateFilteredStream();
+            TwitterCredentials.SetCredentials(UserToken, UserSecret, ConsumerKey, ConsumerSecret);
         }
 
-        public void StartTwitterStream(String hashtag)
+        public void Start()
+        {
+            StartTwitterStream("#HT7");
+        }
+
+        private void StartTwitterStream(String hashtag)
         {
             _filteredStream.AddTrack(hashtag);
-
-
             _filteredStream.MatchingTweetAndLocationReceived -= _filteredStream_MatchingTweetAndLocationReceived;
-
-
             _filteredStream.MatchingTweetAndLocationReceived += _filteredStream_MatchingTweetAndLocationReceived;
-
             _filteredStream.StartStreamMatchingAllConditions();
         }
 
-        void _filteredStream_MatchingTweetAndLocationReceived(object sender, Tweetinvi.Core.Events.EventArguments.MatchedTweetAndLocationReceivedEventArgs e)
+        private void _filteredStream_MatchingTweetAndLocationReceived(object sender, Tweetinvi.Core.Events.EventArguments.MatchedTweetAndLocationReceivedEventArgs e)
         {
-            AlarmAPI.TwitterUpdateHub.SendNewTweet(e.Tweet);
+            TwitterUpdateHub.SendNewTweet(e.Tweet);
+            ToggleLight();
         }
 
         private void ToggleLight()
@@ -61,11 +61,6 @@ namespace AlarmAPI
             _filteredStream.StopStream();
             _filteredStream.ClearTracks();
             StartTwitterStream(hashtag);
-        }
-
-        public void Start()
-        {
-            StartTwitterStream("#PacquiaoMayweather");
         }
     }
 }
