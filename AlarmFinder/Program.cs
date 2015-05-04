@@ -11,7 +11,7 @@ namespace AlarmFinder
     {
         static void Main(string[] args)
         {
-            const string subnet = "10.10.1.";
+            const string subnet = "10.1.8.";
             const int port = 8000;
             const int lower = 1;
             const int upper = 254;

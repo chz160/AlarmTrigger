@@ -13,18 +13,21 @@ namespace AlarmAPI
         private const string ConsumerSecret = "kqaBC51XxmeXT5lekUlXSKCqDRxc23cLcFStsvgNTYdlQ4EkCt";
         private const string UserToken = "16899512-aakZosldVAApq75zwipk5hQ2bdgxbJAAGdHviIV75";
         private const string UserSecret = "w00NwK7WbNOZlIwrvCgiVzt4QGVY6TCDPolLQKIQZtP6L";
+        private readonly string _url = "";
 
         private readonly IFilteredStream _filteredStream;
 
         public AlarmTwitterStreamClass()
         {
+            var ipAddress = System.Configuration.ConfigurationManager.AppSettings["IpAddress"];
+            _url = string.Format("http://{0}:8000", ipAddress);
             _filteredStream = Stream.CreateFilteredStream();
             TwitterCredentials.SetCredentials(UserToken, UserSecret, ConsumerKey, ConsumerSecret);
         }
 
         public void Start()
         {
-            StartTwitterStream("#HT7");
+            StartTwitterStream("#MayThe4thBeWithYou");
         }
 
         private void StartTwitterStream(String hashtag)
@@ -48,9 +51,9 @@ namespace AlarmAPI
             {
                 using (var client = new WebClient())
                 {
-                    client.DownloadString("http://10.10.1.184:8000/on");
+                    client.DownloadString(string.Format("{0}/on", _url));
                     Thread.Sleep(5000);
-                    client.DownloadString("http://10.10.1.184:8000/off");
+                    client.DownloadString(string.Format("{0}/off", _url));
                 }
             });
         }
