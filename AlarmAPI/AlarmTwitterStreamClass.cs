@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using Tweetinvi;
 using System.Net;
+using Tweetinvi.Core.Interfaces.Streaminvi;
 
 namespace AlarmAPI
 {
@@ -16,7 +14,7 @@ namespace AlarmAPI
         private const string UserToken = "16899512-aakZosldVAApq75zwipk5hQ2bdgxbJAAGdHviIV75";
         private const string UserSecret = "w00NwK7WbNOZlIwrvCgiVzt4QGVY6TCDPolLQKIQZtP6L";
 
-        private readonly Tweetinvi.Core.Interfaces.Streaminvi.IFilteredStream _filteredStream;
+        private readonly IFilteredStream _filteredStream;
 
         public AlarmTwitterStreamClass()
         {
@@ -32,6 +30,7 @@ namespace AlarmAPI
         private void StartTwitterStream(String hashtag)
         {
             _filteredStream.AddTrack(hashtag);
+            _filteredStream.AddCustomQueryParameter("include_rts", "true");
             _filteredStream.MatchingTweetAndLocationReceived -= _filteredStream_MatchingTweetAndLocationReceived;
             _filteredStream.MatchingTweetAndLocationReceived += _filteredStream_MatchingTweetAndLocationReceived;
             _filteredStream.StartStreamMatchingAllConditions();
