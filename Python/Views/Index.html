@@ -3,15 +3,11 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
-    <!-- Latest compiled and minified CSS -->
+    <title>Alarm Api</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-    <link rel="stylesheet"  href="Content/Site.css">
+    <link rel="stylesheet" href="Content/Site.css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,15 +18,58 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">Alarm API</a>
+                <a href="/" class="navbar-brand header-logo">Alarm API</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#wifi-section">Configure Wifi</a></li>
+                    <li><a href="/">Upload Script</a></li>
+                    <li><a href="/">Info</a></li>
+                </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
-        <!--Content Starts Here-->
+        <h3 id="wifi-section">Wifi Configuration</h3>
+        <div class="row">
+            <div class="col-md-5">
+                <p>
+                    Enter wi-fi configurations.
+                </p>
+            </div>
+            <div class="col-md-2">
+                <form>
+                    <div class="form-group">
+                        <label for="ssid">SSID</label>
+                        <input type="text" class="form-control" id="ssid" placeholder="SSID">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-5"></div>
+        </div>
+        <h3 id="wifi-section">Upload Custom Scripts</h3>
+        <div class="row">
+            <div class="col-md-5">
+                <p>
+                    Upload custom *.py scripts that gets executed.
+                </p>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="script-upload">File input</label>
+                    <input type="file" id="script-upload" accept=".py">
+                </div>
+            </div>
+            <div class="col-md-5"></div>
+        </div>
         <hr />
         <footer>
-            <p>&copy; 2015 - Extraordinary Jerks LLC</p>
+            <p>&copy; <a href="http://www.extraordinaryjerks.com">2015 - Extraordinary Jerks LLC</a></p>
         </footer>
     </div>
 </body>

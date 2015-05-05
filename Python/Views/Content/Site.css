@@ -33,6 +33,14 @@ textarea {
     border-color: #428bca;
 }
 
-.navbar-inverse .navbar-brand{
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav > li > a:link,
+.navbar-inverse .navbar-nav > li > a:visited,
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:active{
     color: #FFFFFF !important;
+}
+
+.header-logo{
+    font-size: 1.8em;
 }
