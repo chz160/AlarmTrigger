@@ -23,6 +23,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="alarm.py" />
+    <Compile Include="ServerRequestHandler.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content\Site.css" />
+    <Content Include="Views\Index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="Views\Content\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
