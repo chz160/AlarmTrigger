@@ -3,6 +3,7 @@ import time
 import os
 import http.server
 from ServerRequestHandler import WebRequestHandler
+#from WifiScanner import Scanner
 
 # GPIO.setmode(GPIO.BOARD)
 # GPIO.setup(3, GPIO.OUT)
@@ -10,8 +11,12 @@ from ServerRequestHandler import WebRequestHandler
 PORT = 8080
 RequestHandler = WebRequestHandler
 Server = http.server.HTTPServer(('',PORT), RequestHandler)
+#Wifi = Scanner()
+
 
 def StartServer():
+	#access_control_list = Wifi.access_points_list
+	#print("Access Points", Wifi.GetAccessPoints())
 	Server.serve_forever()
 
 def StopServer():
@@ -21,13 +26,13 @@ if __name__ == '__main__':
 	#Server = HTTPServer(('',PORT), RequestHandler)
 
 	print("Serving at port", PORT)
-	print("Starting...")
 	try:
-		#httpd.serve_forever()
+		print("Starting...")
 		StartServer()
 	except (KeyboardInterrupt, SystemExit):
 		print("Finishing...")
-	finally:
+	finally:		
+		print("Stopping...")
 		StopServer()
 		#GPIO.output(3, False)
 		#GPIO.cleanup()print('Hello World')
