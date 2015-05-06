@@ -3,7 +3,7 @@ import http.server
 class WebRequestHandler(http.server.SimpleHTTPRequestHandler):
     
 	def do_GET(self):
-		myOutput = ""
+		serverOutput = ""
 		print(self.path)
 		if self.path == "/":
 			print("Index.html")
@@ -27,11 +27,16 @@ class WebRequestHandler(http.server.SimpleHTTPRequestHandler):
 		elif self.path == "/status":
 			self.send_response(200)
 			self.send_header("Content-type", "application/json")
-			myOutput = "{ message:'Alarm Is Up' }"
+			serverOutput = "{ message:'Alarm Is Up' }"
+		elif self.path == "":
+			self.send_response(200)
+			self.send_header("Content-type", "application/json")
+			serverOutput = "{ message:'Alarm Is Up' }"
 		else:
+			#This needs to be changed
 			self.send_response(200)
 			self.send_header("Content-type", "application/json")
 			
-		self.send_header("Content-length", str(len(myOutput)))
+		self.send_header("Content-length", str(len(serverOutput)))
 		self.end_headers()
-		self.wfile.write(bytes(myOutput))
+		self.wfile.write(bytes(serverOutput, 'utf-8'))

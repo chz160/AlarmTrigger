@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>ba94a09d-4904-4741-babd-94b90cfad7b6</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>alarm.py</StartupFile>
+    <StartupFile>Alarm.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,8 +22,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="alarm.py" />
+    <Compile Include="Alarm.py" />
+    <Compile Include="Lib\__init__.py" />
     <Compile Include="ServerRequestHandler.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WifiScanner.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="__init__.py">
@@ -35,6 +39,7 @@
     <Content Include="Views\Index.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Lib\" />
     <Folder Include="Views\" />
     <Folder Include="Views\Content\" />
   </ItemGroup>
