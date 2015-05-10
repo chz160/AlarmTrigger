@@ -1,7 +1,8 @@
 import http.server
+from WifiScanner import Scanner
 
 class WebRequestHandler(http.server.SimpleHTTPRequestHandler):
-    
+
 	def do_GET(self):
 		serverOutput = ""
 		print(self.path)
@@ -28,10 +29,18 @@ class WebRequestHandler(http.server.SimpleHTTPRequestHandler):
 			self.send_response(200)
 			self.send_header("Content-type", "application/json")
 			serverOutput = "{ message:'Alarm Is Up' }"
-		elif self.path == "":
+		elif self.path == "/wifi/list":
+			access_points = Scanner().access_points_list
+			json = "{\"access_points\" : ["
+			for index, cell in enumerate(access_points):
+				stripped = cell.ssid.strip("\x00")
+				if stripped:
+					json += "{\"ssid\" : \"" + cell.ssid + "\", \"address\" : \"" + cell.address + "\"},"
+			if json.endswith(","):
+				json = json[:-1]			
+			json += "]}"
 			self.send_response(200)
-			self.send_header("Content-type", "application/json")
-			serverOutput = "{ message:'Alarm Is Up' }"
+			serverOutput = json
 		else:
 			#This needs to be changed
 			self.send_response(200)
