@@ -13,7 +13,7 @@
             $.get("/wifi/list", function(data){
                 debugger;
                $.each(JSON.parse(data).access_points, function(){
-                   $("#ssid-dropdown-menu").append("<a href='#"+this.ssid+"'><li role='presentation' data-ssid='"+this.ssid+"'>"+this.ssid+"</li></a>");
+                   $("#ssid-dropdown-menu").append("<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#"+this.ssid+"\">"+this.ssid+"</a></li>");
                 });
             });
         });

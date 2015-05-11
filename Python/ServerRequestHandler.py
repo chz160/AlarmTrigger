@@ -1,5 +1,6 @@
 import http.server
 from WifiScanner import Scanner
+import re
 
 class WebRequestHandler(http.server.SimpleHTTPRequestHandler):
 
@@ -33,7 +34,8 @@ class WebRequestHandler(http.server.SimpleHTTPRequestHandler):
 			access_points = Scanner().access_points_list
 			json = "{\"access_points\" : ["
 			for index, cell in enumerate(access_points):
-				stripped = cell.ssid.strip("\x00")
+				stripped = re.sub(r'[^\x20-\x7e]', '', cell.ssid)
+				print(stripped)
 				if stripped:
 					json += "{\"ssid\" : \"" + cell.ssid + "\", \"address\" : \"" + cell.address + "\"},"
 			if json.endswith(","):
