@@ -1,17 +1,20 @@
 import http.server
 from WifiScanner import Scanner
+import string
 import re
+import os
 
 class WebRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 	def do_GET(self):
 		serverOutput = ""
-		print(self.path)
+		#print(self.path)
 		if self.path == "/":
-			print("Index.html")
+			print(os.getcwd())
 			self.send_response(200)
 			self.send_header("Content-type", "text/html")
 			self.path = "/Views/Index.html"
+			
 			http.server.SimpleHTTPRequestHandler.do_GET(self)
 		elif self.path == "/Content/Site.css":
 			self.send_response(200)
@@ -34,9 +37,10 @@ class WebRequestHandler(http.server.SimpleHTTPRequestHandler):
 			access_points = Scanner().access_points_list
 			json = "{\"access_points\" : ["
 			for index, cell in enumerate(access_points):
-				stripped = re.sub(r'[^\x20-\x7e]', '', cell.ssid)
-				print(stripped)
-				if stripped:
+#				split = re.sub(r'[\x00]', '', cell.ssid)
+#				print(split)
+#				stripped = split.strip()
+				if cell.ssid and not cell.ssid.isspace():
 					json += "{\"ssid\" : \"" + cell.ssid + "\", \"address\" : \"" + cell.address + "\"},"
 			if json.endswith(","):
 				json = json[:-1]			
